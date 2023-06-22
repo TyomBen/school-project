@@ -9,15 +9,13 @@ const Cart = () => {
     useEffect (() => {
         try {
             dispatch (gettingData ()) 
-            dispatch ()
         }catch (e) {
             console.log(e);
         }
     
-    }, [])
+    }, [dataSearching])
     const SearchInput = (event) => {
         dispatch (valueFolow (event.target.value))
-        console.log(event.target.value);
     }
     return (
         <>
