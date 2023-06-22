@@ -9,7 +9,6 @@ const Cart = () => {
     useEffect (() => {
         try {
             dispatch (gettingData ()) 
-            dispatch (dataSearching()) 
             dispatch ()
         }catch (e) {
             console.log(e);

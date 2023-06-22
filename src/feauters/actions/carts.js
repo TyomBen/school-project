@@ -16,7 +16,7 @@ export const gettingData = createAsyncThunk (
 )
 
 export const gettingSearching = createAsyncThunk (
-    'carts/gettingData',
+    'carts/gettingDataSearching',
     async (name, thunkAPI) => {
      
         try {
