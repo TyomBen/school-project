@@ -1,32 +1,41 @@
 import { gettingData } from "../../feauters/actions/carts";
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Countries from "../Countries";
-import { initialStateValue, valueFolow } from "../../feauters/reducers/cartSlices";
+import { valueFolow } from "../../feauters/reducers/cartSlices";
+import { Spin } from "antd";
+import "./styles.css";
 const Cart = () => {
-    const {data,  dataSearching} = useSelector (({carts}) => carts)
-    const dispatch = useDispatch ()
-    useEffect (() => {
-        try {
-            dispatch (gettingData ()) 
-        }catch (e) {
-            console.log(e);
-        }
-    
-    }, [dataSearching])
-    const SearchInput = (event) => {
-        dispatch (valueFolow (event.target.value))
+  const { isloading } = useSelector(({ carts }) => carts);
+  const { data, initialStateValue } = useSelector(({ carts }) => carts);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    try {
+      dispatch(gettingData());
+    } catch (e) {
+      console.log(e);
     }
-    return (
-        <>
-        <input type="text" onChange={(event) => SearchInput (event)}/>
-        {
-                data.map ((countries) => (
-                    <Countries countries = {countries} />
-                ))
-        }
-        </>
-        
-    )
-}
+  }, [initialStateValue]);
+
+  const SearchInput = (event) => {
+    dispatch(valueFolow(event.target.value));
+  };
+  return (
+    <>
+    <input type="text" value={initialStateValue} onChange={SearchInput} />
+    <div className="countries-container">
+      {isloading ? (
+        <Spin size="large" className="spin" />
+      ) : (
+        data.map((countries) => (
+          <div>
+            {console.log(countries)}
+            <Countries countries={countries} />
+          </div>
+        ))
+      )}
+    </div>
+  </>
+  )
+};
 export default Cart;
