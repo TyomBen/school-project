@@ -6,8 +6,9 @@ import { valueFolow } from "../../feauters/reducers/cartSlices";
 import { Spin } from "antd";
 import "./styles.css";
 const Cart = () => {
-  const { isloading } = useSelector(({ carts }) => carts);
-  const { data, initialStateValue } = useSelector(({ carts }) => carts);
+  const { data, initialStateValue, isloading } = useSelector(
+    ({ carts }) => carts
+  );
   const dispatch = useDispatch();
   useEffect(() => {
     try {
@@ -22,20 +23,19 @@ const Cart = () => {
   };
   return (
     <>
-    <input type="text" value={initialStateValue} onChange={SearchInput} />
-    <div className="countries-container">
-      {isloading ? (
-        <Spin size="large" className="spin" />
-      ) : (
-        data.map((countries) => (
-          <div>
-            {console.log(countries)}
-            <Countries countries={countries} />
-          </div>
-        ))
-      )}
-    </div>
-  </>
-  )
+      <input type="text" value={initialStateValue} onChange={SearchInput} />
+      <div className="countries-container">
+        {isloading ? (
+          <Spin size="large" className="spin" />
+        ) : (
+          data.map((countries) => (
+            <div key={countries.ccn3}>
+              <Countries countries={countries} />
+            </div>
+          ))
+        )}
+      </div>
+    </>
+  );
 };
 export default Cart;

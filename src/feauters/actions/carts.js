@@ -4,7 +4,7 @@ import { URL } from "../../Utills/constants";
 export const gettingData = createAsyncThunk(
   "carts/gettingData",
   async (_, thunkAPI) => {
-    const { initialStateValue, data } = thunkAPI.getState().carts;
+    const { initialStateValue } = thunkAPI.getState().carts;
     if (initialStateValue === "") {
       try {
         const response = await axios(`${URL}/all`);
